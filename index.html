@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phone Pe</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: aquamarine;
+      }
+      .container,
+      .container2 {
+        border-radius: 5px;
+        text-align: center;
+        height: 500px;
+        width: 250px;
+        margin: 50px auto;
+        background-color: #fff;
+      }
+      .container2 {
+        display: none;
+      }
+      h2 {
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+        background-color: blueviolet;
+        color: #fff;
+      }
+      p {
+        margin: 40px auto;
+      }
+      #alart {
+        display: none;
+      }
+      img {
+        height: 460px;
+        width: 250px;
+      }
+      input {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 700;
+        margin: 10vh auto;
+      }
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+
+      .fa-circle-check {
+        font-size: 50px;
+        margin: 5vh auto;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Phone Pe</h2>
+      <p>Enter this pin:- <b>246135</b></p>
+      <p id="alart">Please enter your correct pin</p>
+      <div>
+        <input required id="i1" type="number" />
+        <input required id="i2" type="number" />
+        <input required id="i3" type="number" />
+        <input required id="i4" type="number" />
+        <input required id="i5" type="number" />
+        <input required id="i6" type="number" />
+      </div>
+      <i class="fa-solid fa-circle-check"></i>
+    </div>
+    <div class="container2">
+      <h2>Phone Pe</h2>
+      <img
+        id="images"
+        src="https://content.phonepe.com/ppcms/media/filer_public_thumbnails/filer_public/8e/62/8e626f2d-70ee-432f-9f77-f8dcfce25d3a/pending_-_p2p_-_000001.png__200x400_q85_subsampling-2.png"
+        alt=""
+      />
+    </div>
+  </body>
+</html>
+<script
+  src="https://kit.fontawesome.com/a044caf582.js"
+  crossorigin="anonymous"
+></script>
+<script>
+  // let all = document.querySelector(".container p div .fa-circle-check")
+  let tap = document.querySelector(".fa-circle-check");
+  let image = document.querySelector("#images");
+  tap.addEventListener("click", function () {
+    let input1 = document.querySelector("#i1");
+    let input2 = document.querySelector("#i2");
+    let input3 = document.querySelector("#i3");
+    let input4 = document.querySelector("#i4");
+    let input5 = document.querySelector("#i5");
+    let input6 = document.querySelector("#i6");
+
+    // empty input concepte.......................
+    if (
+      input1.value === "" ||
+      input2.value === "" ||
+      input3.value === "" ||
+      input4.value === "" ||
+      input5.value === "" ||
+      input6.value === ""
+    ) {
+      alert("Please enter correct pin");
+      return;
+    }
+    // input div divisible.............
+    let hide1 = document.querySelector(".container");
+    let hide2 = document.querySelector(".container2");
+    hide1.style.display = "none";
+    hide2.style.display = "block";
+    // promise concept
+    let content = new Promise(function (resolve, reject) {
+      setTimeout(function () {
+        if (
+          input1.value == 2 &&
+          input2.value == 4 &&
+          input3.value == 6 &&
+          input4.value == 1 &&
+          input5.value == 3 &&
+          input6.value == 5
+        ) {
+          resolve("Transaction Successful");
+        } else {
+          reject("Transaction Failed");
+        }
+      }, 2000);
+    });
+
+    // invoke promise
+    content
+      .then(function (reuslt) {
+        console.log(reuslt);
+        image.src =
+          "https://i.pinimg.com/736x/fd/d8/7d/fdd87d5c5bce0231c2121626162715f1.jpg";
+        image.style.width = "250px";
+        image.style.height = "460px";
+      })
+      .catch(function (reuslt) {
+        console.log(reuslt);
+        image.src =
+          "https://static.wixstatic.com/media/9ed52a_bbd0d4944b024b919b6b1fa558e9faf7~mv2.jpg/v1/fill/w_506,h_900,al_c,q_85,enc_auto/9ed52a_bbd0d4944b024b919b6b1fa558e9faf7~mv2.jpg";
+        image.style.width = "250px";
+        image.style.height = "460px";
+      });
+  });
+
+  // atomatic move courser when i put input value...........
+  let allInput = document.querySelectorAll("input");
+  allInput.forEach((input, index) => {
+    input.addEventListener("input", function () {
+      if (this.value.length === 1 && index < allInput.length - 1) {
+        allInput[index + 1].select();
+      }
+    });
+  });
+</script>
